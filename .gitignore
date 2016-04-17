@@ -280,3 +280,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+/Marvin/Marvin/Web.Release.config
