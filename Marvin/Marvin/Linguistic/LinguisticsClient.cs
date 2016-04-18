@@ -28,6 +28,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace Marvin.Linguistic
 {
+    /// <summary>
+    /// The linguistics client.
+    /// </summary>
     public class LinguisticsClient : ILinguisticsClient
     {
         #region private members
@@ -83,6 +86,11 @@ namespace Marvin.Linguistic
         private HttpClient httpClient;
         #endregion
 
+        /// <summary>
+        /// Creates a new instance of <see cref="LinguisticsClient"/> class.
+        /// </summary>
+        /// <param name="subscriptionKey">The linguistics service subscription key.</param>
+        /// <param name="serviceHost">The linguistics service host URL.</param>
         public LinguisticsClient(string subscriptionKey, string serviceHost = null)
         {
             this.serviceHost = string.IsNullOrWhiteSpace(serviceHost) ? DefaultServiceHost : serviceHost.Trim();

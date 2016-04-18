@@ -7,8 +7,15 @@ using System.Web.Http;
 
 namespace Marvin
 {
+    /// <summary>
+    /// The WebAPI configuration.
+    /// </summary>
     public static class WebApiConfig
     {
+        /// <summary>
+        /// Registers the WebAPI.
+        /// </summary>
+        /// <param name="config">The HTTP configuration.</param>
         public static void Register(HttpConfiguration config)
         {
             // Json settings

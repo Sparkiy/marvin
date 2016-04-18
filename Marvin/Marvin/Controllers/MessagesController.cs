@@ -3,12 +3,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Marvin.Luis;
+using Marvin.Responses;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Utilities;
 
 namespace Marvin.Controllers
 {
+    /// <summary>
+    /// The messages controller.
+    /// </summary>
     [BotAuthentication]
     public class MessagesController : ApiController
     {
@@ -23,7 +27,11 @@ namespace Marvin.Controllers
                 // Respond to empty message
                 if (!message.HasContent())
                     return message.CreateReplyMessage("I didn't understand that :/", "en");
-                
+
+                // Respont to what message
+                if (message.Text.ToLowerInvariant().Trim().Trim('?', '!', '.', ';', '-').Equals("what"))
+                    return message.RespondWhat();
+
                 // Instantiate LUIS service
                 var luisService = LuisProvider.GetLuis();
 
@@ -31,7 +39,7 @@ namespace Marvin.Controllers
                 var luisResponse = await luisService.QueryAsync(message.Text);
                 if (luisResponse.Intents.Count > 0)
                 {
-                    var mainIntent = luisResponse.Intents.First();
+                    var mainIntent = luisResponse.Intents.OrderByDescending(i => i.Score).First();
                     if (mainIntent.Intent == "GetTime")
                     {
                         return message.CreateReplyMessage($"Over here it's {DateTime.Now.ToShortTimeString()}.", "en");
@@ -39,7 +47,7 @@ namespace Marvin.Controllers
                 }
 
                 // Return our reply to the user
-                return message.CreateReplyMessage($"I didn't understand that :(", "en");
+                return message.RespondUnknownIntent();
             }
             else
             {
@@ -47,6 +55,11 @@ namespace Marvin.Controllers
             }
         }
 
+        /// <summary>
+        /// Handles the system messages.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>Returns message containing the response to an system message; <c>null</c> if system message is unknown.</returns>
         private Message HandleSystemMessage(Message message)
         {
             if (message.Type == "Ping")
