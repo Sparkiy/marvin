@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
+using Marvin.Luis;
+using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Utilities;
-using Newtonsoft.Json;
 
-namespace Marvin
+namespace Marvin.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -22,15 +20,30 @@ namespace Marvin
         {
             if (message.Type == "Message")
             {
-                // calculate something for us to return
-                int length = (message.Text ?? string.Empty).Length;
+                // Respond to empty message
+                if (!message.HasContent())
+                    return message.CreateReplyMessage("I didn't understand that :/", "en");
+                
+                // Instantiate LUIS service
+                var luisService = LuisProvider.GetLuis();
 
-                // return our reply to the user
-                return message.CreateReplyMessage($"You sent {length} characters");
+                // Send and handle luis response
+                var luisResponse = await luisService.QueryAsync(message.Text);
+                if (luisResponse.Intents.Count > 0)
+                {
+                    var mainIntent = luisResponse.Intents.First();
+                    if (mainIntent.Intent == "GetTime")
+                    {
+                        return message.CreateReplyMessage($"Over here it's {DateTime.Now.ToShortTimeString()}.", "en");
+                    }
+                }
+
+                // Return our reply to the user
+                return message.CreateReplyMessage($"I didn't understand that :(", "en");
             }
             else
             {
-                return HandleSystemMessage(message);
+                return this.HandleSystemMessage(message);
             }
         }
 
