@@ -101,6 +101,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sparkiy.WindowsStore.Analytics.Client, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sparkiy.WindowsStore.Analytics.Client.1.1.0.0\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\Sparkiy.WindowsStore.Analytics.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
@@ -159,6 +163,7 @@
     <Compile Include="Luis\LuisProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\MessageExtensions.cs" />
+    <Compile Include="WindowsAnalytics\WindowsStoreAnalyticsExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

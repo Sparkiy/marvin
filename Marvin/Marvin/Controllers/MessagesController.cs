@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Marvin.Luis;
 using Marvin.Responses;
+using Marvin.WindowsAnalytics;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Utilities;
@@ -43,6 +44,10 @@ namespace Marvin.Controllers
                     if (mainIntent.Intent == "GetTime")
                     {
                         return message.CreateReplyMessage($"Over here it's {DateTime.Now.ToShortTimeString()}.", "en");
+                    }
+                    else if (mainIntent.Intent == "GetStoreAcquisitions")
+                    {
+                        return await message.HandleWindowsStoreAnalyticsQueryAsync(luisResponse);
                     }
                 }
 
