@@ -5,9 +5,11 @@ using System.Web.Http;
 using Marvin.Luis;
 using Marvin.Responses;
 using Marvin.WindowsAnalytics;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Utilities;
+using Newtonsoft.Json;
 
 namespace Marvin.Controllers
 {
@@ -33,13 +35,27 @@ namespace Marvin.Controllers
                 if (message.Text.ToLowerInvariant().Trim().Trim('?', '!', '.', ';', '-').Equals("what"))
                     return message.RespondWhat();
 
+                // Debug LUIS
+                var isDebugLuis = false;
+                var luisQuery = message.Text;
+                if (message.Text.StartsWith("debug.luis:"))
+                {
+                    luisQuery = message.Text.Replace("debug.luis:", "");
+                    isDebugLuis = true;
+                }
+
                 // Instantiate LUIS service
                 var luisService = LuisProvider.GetLuis();
 
                 // Send and handle luis response
-                var luisResponse = await luisService.QueryAsync(message.Text);
+                var luisResponse = await luisService.QueryAsync(luisQuery);
                 if (luisResponse.Intents.Count > 0)
                 {
+                    if (isDebugLuis)
+                    {
+                        return message.CreateReplyMessage(JsonConvert.SerializeObject(luisResponse), "en");
+                    }
+
                     var mainIntent = luisResponse.Intents.OrderByDescending(i => i.Score).First();
                     if (mainIntent.Intent == "GetTime")
                     {
