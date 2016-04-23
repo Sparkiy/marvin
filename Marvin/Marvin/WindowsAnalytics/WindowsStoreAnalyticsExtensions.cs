@@ -59,17 +59,18 @@ namespace Marvin.WindowsAnalytics
 
                     var storeResponse = (await client.GetAppAcquisitionsAsync(appId, DateTime.MinValue, DateTime.MaxValue, 1000, 0, true)).ToList();
 
+                    var lastWeekDate = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromDays(7)).ToUniversalTime().Date;
                     var totalAcquisitionsCount = storeResponse
                         .Sum(a => a.AcquisitionQuantity)
                         .ToString(CultureInfo.InvariantCulture);
                     var dayAcquisitionsCount = storeResponse
-                        .Where(a => a.Date > DateTime.Now - TimeSpan.FromHours(24))
+                        .Where(a => a.Date >= lastWeekDate)
                         .Sum(a => a.AcquisitionQuantity)
                         .ToString(CultureInfo.InvariantCulture);
 
                     connector.Messages.SendMessage(
                         message.CreateReplyMessage(
-                            $" - {entity.Entity} has total {totalAcquisitionsCount} (+{dayAcquisitionsCount} in last 24 hours) acquisitions",
+                            $"{entity.Entity} has total {totalAcquisitionsCount} (+{dayAcquisitionsCount} last 7 days) acquisitions",
                             "en"));
                 }
             });
