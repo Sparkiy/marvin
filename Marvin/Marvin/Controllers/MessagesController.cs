@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Marvin.Luis;
-using Marvin.Responses;
 using Marvin.WindowsAnalytics;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -16,7 +15,7 @@ namespace Marvin.Controllers
 {
     public static class UnknownIntentHandlerTaskExtensions
     {
-        public static BotMessagePipeline AsUnknown(this BotMessagePipeline pipeline)
+        public static BotMessagePipeline AddUnknownIntention(this BotMessagePipeline pipeline)
         {
             pipeline.RegisterTask(new UnknownIntentHandlerTask());
             return pipeline;
@@ -42,7 +41,7 @@ namespace Marvin.Controllers
 
     public static class PulpFictionHandlerTaskExtensions
     {
-        public static BotMessagePipeline SayWhat(this BotMessagePipeline pipeline)
+        public static BotMessagePipeline AddSayWhat(this BotMessagePipeline pipeline)
         {
             pipeline.RegisterTask(new PulpFictionHandlerTask());
             return pipeline;
@@ -80,7 +79,7 @@ namespace Marvin.Controllers
 
     public static class EmptyMessageHandlerTaskExtensions
     {
-        public static BotMessagePipeline HandleEmpty(this BotMessagePipeline pipeline)
+        public static BotMessagePipeline AddEmptyHandler(this BotMessagePipeline pipeline)
         {
             pipeline.RegisterTask(new EmptyMessageHandlerTask());
             return pipeline;
@@ -216,7 +215,7 @@ namespace Marvin.Controllers
 
     public static class LuisTimeHandlerTaskExtensions
     {
-        public static BotMessagePipeline HandleLuisTime(this BotMessagePipeline pipeline)
+        public static BotMessagePipeline AddLuisTime(this BotMessagePipeline pipeline)
         {
             pipeline.RegisterTask(new LuisTimeHandlerTask());
             return pipeline;
@@ -258,11 +257,12 @@ namespace Marvin.Controllers
             {
                 return await message
                     .ConstructPipeline()
-                    .HandleEmpty()
-                    .SayWhat()
+                    .AddEmptyHandler()
+                    .AddSayWhat()
                     .AddLuis()
-                    .HandleLuisTime()
-                    .AsUnknown()
+                    .AddLuisTime()
+                    .AddLuisWindowsStoreAnalytics()
+                    .AddUnknownIntention()
                     .RunAsync();
             }
             else
