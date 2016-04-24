@@ -29,16 +29,28 @@ namespace Marvin.WindowsAnalytics
     public class BotMessage : Message
     {
         /// <summary>
+        /// The handled message flag.
+        /// </summary>
+        [JsonProperty(PropertyName = "IsHandled")]
+        public bool IsHandled { get; set; }
+
+        /// <summary>
         /// The debug message flag.
         /// </summary>
         [JsonProperty(PropertyName = "IsDebug")]
         public bool IsDebug { get; set; }
 
         /// <summary>
-        /// The debug message data.
+        /// The debug parameter.
         /// </summary>
-        [JsonProperty(PropertyName = "DebugData")]
-        public string DebugData { get; set; }
+        [JsonProperty(PropertyName = "DebugParam")]
+        public string DebugParam { get; set; }
+
+        /// <summary>
+        /// The response text.
+        /// </summary>
+        [JsonProperty(PropertyName = "Response")]
+        public string Response { get; set; }
 
 
         /// <summary>
@@ -54,16 +66,16 @@ namespace Marvin.WindowsAnalytics
         {
             // Retrieve all serializable properties from target message
             var serializableTargetProperties = typeof(TTarget)
-                .GetProperties(BindingFlags.GetProperty | BindingFlags.SetProperty)
+                .GetProperties()
                 .Where(property => property.GetCustomAttributes<JsonPropertyAttribute>().Any());
 
             // Retrieve all serializable properties from source message
             var serializableSourceProperties = typeof(TSource)
-                .GetProperties(BindingFlags.GetProperty | BindingFlags.SetProperty)
+                .GetProperties()
                 .Where(property => property.GetCustomAttributes<JsonPropertyAttribute>().Any());
 
             // Take only properties that are available in source and targer
-            var commonProperties = serializableSourceProperties.Intersect(serializableTargetProperties);
+            var commonProperties = serializableSourceProperties.Where(ssp => serializableTargetProperties.Any(stp => stp.Name.Equals(ssp.Name)));
 
             // Map common properties to new instance of target object type
             var result = new TTarget();
