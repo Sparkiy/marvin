@@ -27,6 +27,10 @@ namespace Marvin.Controllers
         {
             if (message.Type == "Message")
             {
+                await message
+                    .AsBotMessage()
+                    .AddLuisAsync();
+
                 // Respond to empty message
                 if (!message.HasContent())
                     return message.CreateReplyMessage("I didn't understand that :/", "en");
@@ -63,7 +67,7 @@ namespace Marvin.Controllers
                     }
                     else if (mainIntent.Intent == "GetStoreAcquisitions")
                     {
-                        return await message.HandleWindowsStoreAnalyticsQueryAsync(luisResponse);
+                        //return await message.HandleWindowsStoreAnalyticsQueryAsync(luisResponse);
                     }
                 }
 

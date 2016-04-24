@@ -172,9 +172,12 @@
     <Compile Include="Linguistic\ClientError.cs" />
     <Compile Include="Linguistic\ClientException.cs" />
     <Compile Include="Linguistic\ILinguisticsClient.cs" />
+    <Compile Include="BotMessage.cs" />
     <Compile Include="Luis\LuisProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\MessageExtensions.cs" />
+    <Compile Include="Luis\ILuisMessage.cs" />
+    <Compile Include="Luis\LuisMessage.cs" />
     <Compile Include="WindowsAnalytics\WindowsStoreAnalyticsExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

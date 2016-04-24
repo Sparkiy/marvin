@@ -8,6 +8,11 @@ namespace Marvin.Configuration
     public static class Keys
     {
         /// <summary>
+        /// Gets the LUIS model identifier.
+        /// </summary>
+        public static string LuisModelId => ConfigurationManager.AppSettings["LuisModelId"];
+
+        /// <summary>
         /// Gets the LUIS key.
         /// </summary>
         public static string LuisKey => ConfigurationManager.AppSettings["LuisKey"];

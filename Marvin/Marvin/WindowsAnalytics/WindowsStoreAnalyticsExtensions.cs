@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,12 @@ namespace Marvin.WindowsAnalytics
         /// <param name="message">The message.</param>
         /// <param name="result">The LUIS response.</param>
         /// <returns>Returns the message with response to Windows Store Analytics API.</returns>
-        public static async Task<Message> HandleWindowsStoreAnalyticsQueryAsync(this Message message, LuisResult result)
+        public static async Task<Message> HandleWindowsStoreAnalyticsQueryAsync(this LuisMessage message)
         {
-            if (result.Entities.Count <= 0)
+            if (message.Luis.Entities.Count <= 0)
                 return message.CreateReplyMessage("Please tell me for what app(s) you want the stats for.");
 
-            RetrieveWindowsStoreData(message, result);
+            RetrieveWindowsStoreData(message, message.Luis);
 
             return message.CreateReplyMessage("Let me contact Microsoft for that info...", "en");
         }
