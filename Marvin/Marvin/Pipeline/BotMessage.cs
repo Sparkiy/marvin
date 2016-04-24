@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
-namespace Marvin.WindowsAnalytics
+namespace Marvin.Pipeline
 {
     /// <summary>
     /// The message extensions.

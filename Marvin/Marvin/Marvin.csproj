@@ -161,7 +161,20 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration\Keys.cs" />
+    <Compile Include="Pipeline\BotMessagePipeline.cs" />
+    <Compile Include="Pipeline\BotMessagePipelineExtensions.cs" />
+    <Compile Include="Pipeline\BotMessagePipelineTask.cs" />
+    <Compile Include="Tasks\EmptyMessage\EmptyMessageHandlerTask.cs" />
+    <Compile Include="Tasks\EmptyMessage\EmptyMessageHandlerTaskExtensions.cs" />
+    <Compile Include="Luis\LuisPipelineTask.cs" />
+    <Compile Include="Luis\LuisPipelineTaskExtensions.cs" />
+    <Compile Include="Tasks\Luis\Time\LuisTimeHandlerTask.cs" />
+    <Compile Include="Tasks\Luis\Time\LuisTimeHandlerTaskExtensions.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Tasks\Finny\PulpFictionHandlerTask.cs" />
+    <Compile Include="Tasks\Finny\PulpFictionHandlerTaskExtensions.cs" />
+    <Compile Include="Tasks\UnknownIntent\UnknownIntentHandlerTask.cs" />
+    <Compile Include="Tasks\UnknownIntent\UnknownIntentHandlerTaskExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,12 +185,13 @@
     <Compile Include="Linguistic\ClientError.cs" />
     <Compile Include="Linguistic\ClientException.cs" />
     <Compile Include="Linguistic\ILinguisticsClient.cs" />
-    <Compile Include="BotMessage.cs" />
+    <Compile Include="Pipeline\BotMessage.cs" />
     <Compile Include="Luis\LuisProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Luis\ILuisMessage.cs" />
     <Compile Include="Luis\LuisMessage.cs" />
     <Compile Include="WindowsAnalytics\WindowsStoreAnalyticsExtensions.cs" />
+    <Compile Include="WindowsAnalytics\WindowsStoreAnalyticsHandlerTaskExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -191,6 +205,7 @@
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Brain\" />
-    <Folder Include="Pipeline\" />
+    <Folder Include="Tasks\Luis\WindowsStoreAnalytics\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

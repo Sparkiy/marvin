@@ -1,7 +1,8 @@
+using Marvin.Pipeline;
 using Microsoft.Bot.Builder.Luis;
 using Newtonsoft.Json;
 
-namespace Marvin.WindowsAnalytics
+namespace Marvin.Luis
 {
     /// <summary>
     /// The LUIS message.

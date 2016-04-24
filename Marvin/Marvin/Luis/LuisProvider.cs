@@ -1,9 +1,5 @@
-﻿using System.Threading.Tasks;
-using Marvin.Configuration;
-using Marvin.WindowsAnalytics;
+﻿using Marvin.Configuration;
 using Microsoft.Bot.Builder.Luis;
-using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
 
 namespace Marvin.Luis
 {

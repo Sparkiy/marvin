@@ -1,27 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Marvin.Configuration;
 using Marvin.Controllers;
-using Microsoft.Bot.Builder.Luis;
+using Marvin.Luis;
+using Marvin.Pipeline;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
 using Sparkiy.WindowsStore.Analytics.Client.Models.v10;
 
 namespace Marvin.WindowsAnalytics
 {
-    public static class WindowsStoreAnalyticsHandlerTaskExtensions
-    {
-        public static BotMessagePipeline AddLuisWindowsStoreAnalytics(this BotMessagePipeline pipeline)
-        {
-            pipeline.RegisterTask(new WindowsStoreAnalyticsHandlerTask());
-            return pipeline;
-        }
-    }
-
     /// <summary>
     /// The Windows Store Analyitics extensions.
     /// </summary>

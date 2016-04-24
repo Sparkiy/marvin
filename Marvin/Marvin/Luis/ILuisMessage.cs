@@ -1,6 +1,6 @@
 using Microsoft.Bot.Builder.Luis;
 
-namespace Marvin.WindowsAnalytics
+namespace Marvin.Luis
 {
     /// <summary>
     /// The LUIS message.
