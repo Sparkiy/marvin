@@ -5,14 +5,31 @@ using Newtonsoft.Json;
 
 namespace Marvin.Luis
 {
+    /// <summary>
+    /// The LUIS pipeline task.
+    /// </summary>
     public class LuisPipelineTask : BotMessagePipelineTask
     {
+        /// <summary>
+        /// Handles the bot message.
+        /// This will populate the message with LUIS response data.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>Returns the <see cref="LuisMessage"/> that is populated with LUIS response data.</returns>
         public override async Task<BotMessage> HandleMessage(BotMessage message)
         {
             // Run LUIS task
             return await HandleMessageAsync(message);
         }
 
+        /// <summary>
+        /// Populates the specified message with LUIS response data.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>Returns new instance of <see cref="LuisMessage"/> that is populated with LUIS response data.</returns>
+        /// <remarks>
+        /// Access the LUIS response data through <see cref="LuisMessage.Luis"/> property.
+        /// </remarks>
         private static async Task<LuisMessage> HandleMessageAsync(BotMessage message)
         {
             // Translate to LUIS message
@@ -31,6 +48,11 @@ namespace Marvin.Luis
             return luisMessage;
         }
 
+        /// <summary>
+        /// Queries the LUIS with text from message.
+        /// </summary>
+        /// <param name="query">The message text.</param>
+        /// <returns>Returns the LUIS response for specified query.</returns>
         private static async Task<LuisResult> GetLuisResponseAsync(string query)
         {
             // Instantiate LUIS service
