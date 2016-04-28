@@ -1,6 +1,6 @@
 using Marvin.Pipeline;
 
-namespace Marvin.Tasks.Finny
+namespace Marvin.Tasks.Funny
 {
     public static class PulpFictionHandlerTaskExtensions
     {

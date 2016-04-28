@@ -3,13 +3,12 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Marvin.Configuration;
-using Marvin.Controllers;
 using Marvin.Luis;
 using Marvin.Pipeline;
 using Microsoft.Bot.Connector;
 using Sparkiy.WindowsStore.Analytics.Client.Models.v10;
 
-namespace Marvin.WindowsAnalytics
+namespace Marvin.Tasks.Luis.WindowsStoreAnalytics
 {
     /// <summary>
     /// The Windows Store Analyitics extensions.

@@ -1,7 +1,6 @@
-using Marvin.Controllers;
 using Marvin.Pipeline;
 
-namespace Marvin.WindowsAnalytics
+namespace Marvin.Tasks.Luis.WindowsStoreAnalytics
 {
     public static class WindowsStoreAnalyticsHandlerTaskExtensions
     {

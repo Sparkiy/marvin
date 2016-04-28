@@ -171,8 +171,8 @@
     <Compile Include="Tasks\Luis\Time\LuisTimeHandlerTask.cs" />
     <Compile Include="Tasks\Luis\Time\LuisTimeHandlerTaskExtensions.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Tasks\Finny\PulpFictionHandlerTask.cs" />
-    <Compile Include="Tasks\Finny\PulpFictionHandlerTaskExtensions.cs" />
+    <Compile Include="Tasks\Funny\PulpFictionHandlerTask.cs" />
+    <Compile Include="Tasks\Funny\PulpFictionHandlerTaskExtensions.cs" />
     <Compile Include="Tasks\UnknownIntent\UnknownIntentHandlerTask.cs" />
     <Compile Include="Tasks\UnknownIntent\UnknownIntentHandlerTaskExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,8 +190,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Luis\ILuisMessage.cs" />
     <Compile Include="Luis\LuisMessage.cs" />
-    <Compile Include="WindowsAnalytics\WindowsStoreAnalyticsExtensions.cs" />
-    <Compile Include="WindowsAnalytics\WindowsStoreAnalyticsHandlerTaskExtensions.cs" />
+    <Compile Include="Tasks\Luis\WindowsStoreAnalytics\WindowsStoreAnalyticsExtensions.cs" />
+    <Compile Include="Tasks\Luis\WindowsStoreAnalytics\WindowsStoreAnalyticsHandlerTaskExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -213,7 +213,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Brain\" />
-    <Folder Include="Tasks\Luis\WindowsStoreAnalytics\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

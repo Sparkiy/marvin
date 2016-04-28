@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Marvin.Pipeline;
 using Microsoft.Bot.Connector;
 
-namespace Marvin.Tasks.Finny
+namespace Marvin.Tasks.Funny
 {
     public class PulpFictionHandlerTask : BotMessagePipelineTask
     {
